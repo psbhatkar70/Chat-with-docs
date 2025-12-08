@@ -26,7 +26,9 @@ const [error,setError]=useState(null);
   }
 
   const handlesubmitpdf= async ()=>{
+    if(loading) return;
     setLoading(true)
+    setError();
      if (!selectedFile) return alert("Please select a PDF first");
     const formData = new FormData();
     formData.append("pdf", selectedFile);
