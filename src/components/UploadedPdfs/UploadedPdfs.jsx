@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import api from '../axios/api'
 
 function UploadedPdfs() {
- 
+    const [error,setError]=useState();
     const [files,setFiles]=useState([]);
     const [answer,setAnswer]=useState();
     const [selectedfile,setSelectedfile]=useState(null);
@@ -10,6 +10,8 @@ function UploadedPdfs() {
     const [loading,setLoading]=useState(false);
 
     const getAnswer = async ()=>{
+      if(loading) return;
+        setError();
         setLoading(true);
         setAnswer();
         const PenecoleId = selectedfile.PenecoleId;
@@ -22,7 +24,7 @@ function UploadedPdfs() {
             setAnswer(res.data.answer);
             setLoading(false);
         } catch (error) {
-            
+            setError(error);
         }
     }
 
@@ -188,6 +190,12 @@ function UploadedPdfs() {
         >
           Get Answer
         </button>
+
+        {error && (
+          <>
+          <p>Looks like we lost connection to AI.</p>
+          </>
+        )}
       </>
     )}
   </div>
