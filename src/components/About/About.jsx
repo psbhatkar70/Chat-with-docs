@@ -21,29 +21,36 @@ function About() {
         <hr className="divider" />
 
         {/* --- 2. PROBLEM & SOLUTION --- */}
-        <section className="section">
-          <h2>01. The Concept</h2>
+       <section className="section">
+  <h2>01. The Concept</h2>
 
-          <div className="grid-2">
-            <div className="card">
-              <h3>The Problem</h3>
-              <p>
-                Traditional Large Language Models (LLMs) suffer from context window limitations and cannot 
-                access private, offline data. They often hallucinate when processing dense technical reports 
-                or long legal contracts.
-              </p>
-            </div>
+  <div className="grid-2">
+    <div className="card">
+      <h3>The Problem</h3>
+      
+        <ul>
+          <li>Most AI models can’t handle long PDFs and miss important details or mix things up.</li>
+          <li>They forget the PDF content once the chat resets — no long-term memory of your files.</li>
+          <li>They can’t access your private or offline documents directly.</li>
+          <li>This leads to inaccurate answers, especially with technical, legal, or research-heavy PDFs.</li>
+        </ul>
+   
+    </div>
 
-            <div className="card highlight-card">
-              <h3>The Solution</h3>
-              <p>
-                A <strong>RAG Architecture</strong> that transforms static PDF documents into a dynamic knowledge 
-                base. By retrieving strictly relevant semantic chunks before inference, we ensure high accuracy, 
-                zero data leakage, and sub-second response times for complex queries.
-              </p>
-            </div>
-          </div>
-        </section>
+    <div className="card highlight-card">
+      <h3>The Solution</h3>
+      
+        <ul>
+          <li>We break your PDF into meaningful chunks and store them as a searchable knowledge base.</li>
+          <li>When you ask a question, only the most relevant pieces are retrieved for the AI.</li>
+          <li>The AI doesn’t need to “remember” anything — it always fetches fresh, accurate info.</li>
+          <li>You get fast, precise answers with full privacy and reliability.</li>
+        </ul>
+      
+    </div>
+  </div>
+</section>
+
 
         {/* --- 3. ARCHITECTURE --- */}
         <section className="section">
@@ -149,7 +156,7 @@ function About() {
                 <h3>Inference Engine (Chat)</h3>
                 <ul>
                   <li><strong>Query Embedding:</strong> User question is converted into a vector (RETRIEVAL_QUERY task type).</li>
-                  <li><strong>Semantic Search:</strong>A Cosine Similarity search runs against the specific file namespace to retrieve the top 3 <code>topK=3</code> most relevant text chunks.</li>
+                  <li><strong>Semantic Search:</strong>A Cosine Similarity search runs against the specific file namespace to retrieve the top 5 <code>topK=5</code> most relevant text chunks.</li>
                   <li><strong>Context Injection:</strong>Retrieved chunks are appended to a strict system prompt ("Answer using ONLY this context").</li>
                   <li><strong>Generation:</strong>Gemini 2.5 Flash synthesizes the final answer citing the provided facts.</li>
                 </ul>

@@ -4,6 +4,7 @@ import api from '../axios/api';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const [loading,setLoading]=useState(false);
   const [error,setError] = useState(false);
 const [showPassword, setShowPassword] = useState(false);
 const emailRef =useRef(null);
@@ -14,6 +15,7 @@ const handlegotoSignup=()=>{
 }
     const handleLogin = async ()=>{
          try {
+          setLoading(true);
           setError(false);
             console.log("1st")
             const email=emailRef.current.value;
@@ -25,8 +27,9 @@ const handlegotoSignup=()=>{
 
             console.log(res);
             navigate('/home');
-
+            setLoading(false)
         } catch (error) {
+          setLoading(false)
           setError(true)
             console.log(error)
         }
@@ -193,7 +196,44 @@ return (
         </div>
 
         {error && <div className="error-box">Invalid email or password</div>}
+      {loading && (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      padding: "12px",
+      borderRadius: "8px",
+      border: "1px solid #eee",
+      background: "#fafafa",
+      marginBottom: "16px",
+      fontSize: "14px",
+      color: "#444",
+    }}
+  >
+    <div
+      style={{
+        width: "16px",
+        height: "16px",
+        border: "2px solid #ddd",
+        borderTop: "2px solid #000",
+        borderRadius: "50%",
+        animation: "spin 0.7s linear infinite",
+      }}
+    />
 
+    <span>Signing in..</span>
+
+    <style>
+      {`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}
+    </style>
+  </div>
+)}
         <button className="login-btn" onClick={handleLogin}>
           Log In
         </button>

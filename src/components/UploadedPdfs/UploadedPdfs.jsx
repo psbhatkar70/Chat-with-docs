@@ -8,6 +8,7 @@ function UploadedPdfs() {
     const [selectedfile,setSelectedfile]=useState(null);
     const questionRed =useRef();
     const [loading,setLoading]=useState(false);
+    const [fileloading,setfileLoading]=useState(false);
 
     const getAnswer = async ()=>{
       if(loading) return;
@@ -31,9 +32,11 @@ function UploadedPdfs() {
 
     useEffect(()=>{
         const getfiles= async ()=>{
+          setfileLoading(true);
             const res=await api.get('/files/getall');
             setFiles(res.data.data.files);
             console.log(res.data.data.files)
+            setfileLoading(false);
         }
         getfiles();
     },[])
@@ -60,8 +63,46 @@ function UploadedPdfs() {
     >
       PDF Q&A
     </h2>
+{fileloading && (
+  <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "10px",
+      padding: "12px",
+      borderRadius: "8px",
+      border: "1px solid #eee",
+      background: "#fafafa",
+      marginBottom: "16px",
+      fontSize: "14px",
+      color: "#444",
+    }}
+  >
+    <div
+      style={{
+        width: "16px",
+        height: "16px",
+        border: "2px solid #ddd",
+        borderTop: "2px solid #000",
+        borderRadius: "50%",
+        animation: "spin 0.7s linear infinite",
+      }}
+    />
 
-    <select
+    <span>Getting files</span>
+
+    <style>
+      {`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}
+    </style>
+  </div>
+)}
+   {!fileloading && (
+     <select
       name="file"
       id="file"
       onChange={(e) => {
@@ -87,6 +128,7 @@ function UploadedPdfs() {
         </option>
       ))}
     </select>
+   )}
 
     {selectedfile && (
       <>
