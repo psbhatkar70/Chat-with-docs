@@ -20,8 +20,8 @@ const handlegotoSignup=()=>{
             const password=passwordRef.current.value;
           
             const res = await api.post('/user/login',{ email , password });
-            localStorage.setItem('trip-access-token', res.data.token);
-            localStorage.setItem("trip-user", JSON.stringify(res.data.user));
+            localStorage.setItem('chat-with-docs-token', res.data.token);
+            localStorage.setItem("chat-user", JSON.stringify(res.data.user));
 
             console.log(res);
             navigate('/home');

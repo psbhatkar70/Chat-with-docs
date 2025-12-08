@@ -27,8 +27,8 @@ function SignUp() {
                 return;
             };
             const res = await api.post('/user/signup',{name , email , password , confirmPassword});
-            localStorage.setItem('trip-access-token', res.data.token);
-            localStorage.setItem("trip-user", JSON.stringify(res.data.newUser));
+            localStorage.setItem('chat-with-docs-token', res.data.token);
+            localStorage.setItem("chat-user", JSON.stringify(res.data.newUser));
 
             navigate('/home');
             console.log(res);

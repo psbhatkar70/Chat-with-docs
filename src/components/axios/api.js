@@ -6,7 +6,7 @@ const api=axios.create({
 });
 
 api.interceptors.request.use(function(config){
-    const token = localStorage.getItem('trip-access-token');
+    const token = localStorage.getItem('chat-with-docs-token');
 
     if(token){
         config.headers['Authorization']='Bearer '+token;
@@ -18,7 +18,7 @@ function(error){
     if (error.response && error.response.status === 401) {
       console.log("Token expired or invalid. Logging out...");
      
-      localStorage.removeItem('trip-access-token');
+      localStorage.removeItem('chat-with-docs-token');
       
       window.location.href = '/'; 
     }
