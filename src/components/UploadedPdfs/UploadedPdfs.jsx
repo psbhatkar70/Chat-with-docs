@@ -26,6 +26,7 @@ function UploadedPdfs() {
             setLoading(false);
         } catch (error) {
             setError(error);
+            setLoading(false);
         }
     }
 
