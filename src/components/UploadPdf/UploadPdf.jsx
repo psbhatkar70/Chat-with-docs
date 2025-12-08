@@ -33,10 +33,7 @@ const [error,setError]=useState(null);
     formData.append("FileName",FileName);
     try {
         console.log(FileName);
-       const res = await api.post('/pdf/pdfparse', formData, {
-        headers: { "Content-Type": "multipart/form-data"
-         },
-      });
+       const res = await api.post('/pdf/pdfparse', formData);
 
       console.log("Response:", res.data);
       setLoading(false)
